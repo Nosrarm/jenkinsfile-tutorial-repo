@@ -8,7 +8,7 @@ pipeline {
         }
         stage('Deploy') {
             steps {
-                sh 'docker run -d -p 28080:80 --name salem-app salem-moderator'
+                sh 'docker run -d -p 28080:80 --name salem-app2 salem-moderator'
             }
         }
     }

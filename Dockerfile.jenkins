@@ -1,0 +1,14 @@
+FROM jenkins/jenkins:lts
+
+USER root
+
+# Jenkins 공식 이미지가 최신 데비안(Trixie)을 기반으로 하면서 
+# apt-get을 통한 설치 시 패키지 리포지토리 호환성 문제가 발생하는 것을 방지하기 위해,
+# 공식 Docker Static 바이너리 (CLI)를 직접 다운로드하여 설치합니다.
+RUN curl -fsSL -o docker.tgz https://download.docker.com/linux/static/stable/x86_64/docker-25.0.3.tgz && \
+    tar xzvf docker.tgz && \
+    mv docker/docker /usr/local/bin/docker && \
+    chmod +x /usr/local/bin/docker && \
+    rm -rf docker docker.tgz
+
+USER jenkins
